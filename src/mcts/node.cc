@@ -263,13 +263,15 @@ void Node::CancelScoreUpdate() { --n_in_flight_; }
 
 void Node::FinalizeScoreUpdate(float v) {
   // Add new value to W.
-  w_ += v;
+  // w_ += v;
   // Increment N.
-  ++n_;
+  // ++n_;
   // Decrement virtual loss.
-  --n_in_flight_;
+  // --n_in_flight_;
   // Recompute Q.
-  q_ = w_ / n_;
+  // q_ = w_ / n_;
+  q_ += (v - q_) / (std::pow(n_, 0.75) + 1);
+  ++n_;
 }
 
 void Node::UpdateMaxDepth(int depth) {
