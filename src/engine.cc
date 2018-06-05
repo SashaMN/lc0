@@ -102,9 +102,14 @@ SearchLimits EngineController::PopulateSearchLimits(int /*ply*/, bool is_black,
   float slowmover = options_.Get<float>(kSlowMoverStr);
   int64_t move_overhead = options_.Get<int>(kMoveOverheadStr);
   // Total time till control including increments.
+  if (time < 2500 + 3.0 * increment) {
+    limits.time_ms = increment / 2;
+    return limits;
+  }
   auto total_moves_time =
       std::max(int64_t{0},
-               time + increment * (movestogo - 1) - move_overhead * movestogo);
+               time + increment * (movestogo - 1) - move_overhead * movestogo - 
+               2500);
 
   const int kSmartPruningToleranceMs = 200;
 
