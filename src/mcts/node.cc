@@ -296,7 +296,6 @@ void Node::FinalizeScoreUpdate(float v) {
   --n_in_flight_;
   // Recompute Q.
   q_ = w_ / n_;
-  ++n_;
 }
 
 void Node::UpdateMaxDepth(int depth) {
