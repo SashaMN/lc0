@@ -114,7 +114,7 @@ SearchLimits EngineController::PopulateSearchLimits(int ply, bool is_black,
 
   // Total time till control including increments.
   if (time < 2500 + 3.0 * increment) {
-    limits.time_ms = increment / 2;
+    limits.time_ms = increment / 3;
     return limits;
   }
   auto total_moves_time =
@@ -134,7 +134,7 @@ SearchLimits EngineController::PopulateSearchLimits(int ply, bool is_black,
 
   // Make sure we don't exceed current time limit with what we calculated.
   limits.time_ms =
-      std::max(int64_t{0}, std::min(this_move_time, time - move_overhead));
+      std::max(int64_t{0}, std::min(this_move_time, time - 1000));
   return limits;
 }
 
